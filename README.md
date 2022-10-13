@@ -20,7 +20,14 @@ pour utiliser NOC.py
 
 1) commencez par run jls.py avec le dossier source comme argument, cela va generer un fichier tp_1.csv
 
-2) executer NOC.py avec le path du dossier que vous voulez analyser comme rpmeir argument et le fichier tp_1.csv comme deuxieme arguement que jls aurait produit. Le script va ajouter le nombre d'enfants de chaque classe dans le dossier dans la colonne NOC dans tp_1.csv
+2) executer NOC.py avec le path du dossier que vous voulez analyser comme prmier argument et le fichier tp_1.csv comme deuxieme arguement que jls aurait produit. Le script va ajouter le nombre d'enfants de chaque classe dans le dossier dans la colonne NOC dans tp_1.csv
+
+
+pour utiliser WMC.py
+
+1) commencez par run jls.py avec le dossier source comme argument, cela va generer un fichier tp_1.csv
+
+2) executer WMC.py avec le path du dossier que vous voulez analyser comme prmier argument et le fichier tp_1.csv comme deuxieme arguement que jls aurait produit. Le script va ajouter le nombre de methodes de chaque classe dans le dossier dans la colonne WMC dans tp_1.csv
 
 
 
