@@ -15,7 +15,7 @@ class CLOC_Ratio:
         #open file and read it
         source_file = open(path, "r", encoding='utf-8',errors='ignore')
         
-        #count the amount of non-empty lines for all paths in tp_1.csv
+        #count the amount of non-empty lines for all paths in tp_2.csv
         count = 0
         for line in source_file:
             if line.strip():
@@ -23,14 +23,14 @@ class CLOC_Ratio:
                 
         count = int(count)
 
-        #if create tp_1.csv if it doesnt exist
-        if not pl.Path("tp_1.csv").exists():
-            print("tp_1.csv does not exist, create it using jls.py")
+        #if create tp_2.csv if it doesnt exist
+        if not pl.Path("tp_2.csv").exists():
+            print("tp_2.csv does not exist, create it using jls.py")
         else:
             #if CLOC_Ratio column is not in the csv file, create it and add the count to corresponding class
-            if "CLOC_Ratio" not in open("tp_1.csv").read():
+            if "CLOC_Ratio" not in open("tp_2.csv").read():
                 #make copy of csv file
-                df = pd.read_csv("tp_1.csv")
+                df = pd.read_csv("tp_2.csv")
                 #add CLOC_Ratio column
                 df["CLOC_Ratio"] = ""
                 #add count to corresponding class
@@ -40,22 +40,22 @@ class CLOC_Ratio:
                         df.at[i, "CLOC_Ratio"] = count
 
             else:
-                df = pd.read_csv("tp_1.csv")
+                df = pd.read_csv("tp_2.csv")
                 for i in range(len(df)):
                     if df["nom de la classe"][i] == file_name:
                         df.at[i, "CLOC_Ratio"] = count
 
-            df.to_csv("tp_1.csv", index=False)
+            df.to_csv("tp_2.csv", index=False)
             
             
-        #iterate through all paths in tp_1.csv
+        #iterate through all paths in tp_2.csv
         below10 = 0
         for i in range(len(df)):
             count_others= 0
             commentLines = -35 # on enleve toutes les lignes du copyright claim
             #open path
             source_file = open(df["chemin du ficher"][i], "r", encoding='utf-8',errors='ignore')
-            #count the amount of non-empty lines for all paths in tp_1.csv
+            #count the amount of non-empty lines for all paths in tp_2.csv
             for line in source_file:
                 if line.strip():
                     count_others += 1
@@ -71,7 +71,7 @@ class CLOC_Ratio:
         print('percent ratio of classes with CLOC_Ratio bellow 10: ' + str(below10*100/len(df)))
 
         
-        df.to_csv("tp_1.csv", index=False)
+        df.to_csv("tp_2.csv", index=False)
 
 if __name__ == "__main__":
     instance = CLOC_Ratio()

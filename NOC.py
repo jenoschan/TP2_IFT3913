@@ -60,7 +60,7 @@ class NOC:
             data.drop('NOC', axis = 1)
         data['NOC'] = counts
 
-        data.to_csv('tp_1.csv', index=False)
+        data.to_csv('tp_2.csv', index=False)
 
 
 if __name__ == "__main__":
