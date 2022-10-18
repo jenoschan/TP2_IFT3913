@@ -81,9 +81,12 @@ class CBO:
         #in tp_2.csv, reorganize in ascending order of CBO
         data = pd.read_csv('tp_2.csv')
         
-        data = data.sort_values(by=['CBO'], ascending=False)
+        median = data['CBO'].median()
+        data = data.sort_values(by=['CBO'], ascending=True)
         
         data.to_csv('tp_2.csv', index=False)
+                
+        print('The median CBO is', median)
         
 
 if __name__ == "__main__":

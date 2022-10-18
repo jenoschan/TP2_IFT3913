@@ -1,49 +1,62 @@
-from radon.visitors import ComplexityVisitor
-import sys
+import math
 import pathlib as pl
 import pandas as pd
 
 class CycloComp:
-
-    path = sys.argv[1]
     
-    def cyclocomp(self, path):
+    def cyclocomp(self):
         #calculate cyclomatic complexity for all files in tp_2.csv
         #and add the column to the csv
         
-        #if path is not a file
-        if not pl.Path(path).is_file():
-            print("Path given is not a file")
-        else: 
-            #read file 
-            source_file = open(path, "r", encoding='utf-8',errors='ignore')
-            for line in source_file:
-                #get chemin du fichier from line
-                chemin = line.split(",")[0]
-                #get cyclomatic complexity for chemin
-                cc_value = ComplexityVisitor.from_code(open(chemin, "r", encoding='utf-8',errors='ignore').read()).total_complexity
-                #get class name from chemin
-                file_name = pl.Path(chemin).name
-                #if create tp_2.csv if it doesnt exist
-                if not pl.Path("tp_2.csv").exists():
-                    print("tp_2.csv does not exist, create it using jls.py")
-                else:
-                    #if CC column is not in the csv file, create it and add the count to corresponding class
-                    if "CC" not in open("tp_2.csv").read():
-                        #make copy of csv file
-                        df = pd.read_csv("tp_2.csv")
-                        #add CC column
-                        df["CC"] = ""
-                        #add count to corresponding class
-                        for i in range(len(df)):
-                            #get class name from path
-                            if df["nom de la classe"][i] == file_name:
-                                #df["CC"][i] = cc_value	
-                                df.at[i, "CC"] = cc_value
-                    else:
-                        df = pd.read_csv("tp_2.csv")
-                        for i in range(len(df)):
-                            if df["nom de la classe"][i] == file_name:
-                                df.at[i, "CC"] = cc_value
-                                
-                                
+        #if tp_2.csv doesnt exist
+        if not pl.Path("tp_2.csv").exists():
+            print ("tp_2.csv does not exist, create it with jls.py first")
+        else:
+        #for line in csv file, get path 
+            csv_file = pd.read_csv("tp_2.csv")
+            #iterate through lines in csv file
+            for i in range(len(csv_file)):
+                #get chemin du fichier
+                path = csv_file["chemin du ficher"][i]
+                #read path
+                source_file = open(path, "r", encoding='utf-8',errors='ignore')
+                
+                count = 0 
+                #for every conditional contruct in the file
+                for line in source_file:
+                    if 'if' in line or 'for' in line or 'while' in line or 'case' in line:
+                        count += 1
+                    #if there are any additional boolean condition
+                    if '&&' in line or '||' in line:
+                        count += 1
+                source_file.close()
+                
+                #in tp_2.csv, add the cyclomatic complexity to the corresponding class
+                for i in range(len(csv_file)):
+                    if csv_file["nom de la classe"][i] == pl.Path(path).name:
+                        #if CC column doesnt exist, create it
+                        if "CC" not in open("tp_2.csv").read():
+                            csv_file["CC"] = ""
+                            csv_file.at[i, "CC"] = count
+                        else:
+                            csv_file.at[i, "CC"] = count
+                
+                #acending order of CC
+                csv_file = csv_file.sort_values(by=['CC'], ascending=True)
+                
+                csv_file.to_csv("tp_2.csv", index=False, encoding='utf-8')
+            
+            #count the amount of classes with CC < 10
+            below10 = 0
+            for i in range(len(csv_file)):
+                if csv_file["CC"][i] < 10:
+                    below10 += 1
+                
+            result = math.floor(below10/len(csv_file)*100)
+            print("The percentage of classes with CC < 10 is: ", result, "%")
+            
+
+if __name__ == '__main__':
+    CycloComp = CycloComp()
+
+    CycloComp.cyclocomp()
