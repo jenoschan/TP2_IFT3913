@@ -22,6 +22,13 @@ Pour utiliser CBO.py:
 
 2) executer CBO.py avec le chemin du dossier à analyzer et le chemin vers le fichier csv, le script va comparer le contenu avec tp_2.csv est déterminer le couplage de chaque classe avec tous les autres classes. La classe avec le plus haut CBO est imprimé dans le terminal. Le reste des résultats est dans le fichier csv. S'il y a un grand nombre de classe avec un grand nombre de CBO, le code n'est pas modulaire.
 
+Pour utiliser Cyclo_Comp.py:
+
+1) commencez par run jls.py avec le dossier source comme argument, cela va generer un fichier tp_2.csv
+
+2) Il suffit d'exécuter Cyclo_Comp.py sans paramètre. (python Cyclo_Comp.py) Le code va analyser tous les fichiers dans le csv.
+
+
 Pour utiliser NOC.py
 
 1) commencez par run jls.py avec le dossier source comme argument, cela va generer un fichier tp_2.csv
