@@ -23,7 +23,7 @@ class CBO:
             print("Path given does not exist")
         #if csv file doesnt exist
         elif not pl.Path(csv_path).exists():
-            print("CSV file given does not exist")
+            print("CSV file given does not exist, create it with jls.py")
         else: 
             print("File has been updated with results")
 
@@ -36,11 +36,9 @@ class CBO:
             csv_file.close()
         files.pop(0)
 
-        counts = []
-        # get the number of other class mentions inside current class
-        visits = []
+        # get number of classes that current class is coupled to, where coupled is defined as a method in a class calling another class or uses its variables
+        coupling = []
         for i in range(len(files)):
-            visited = []
             count = 0
             f = open(files[i][0], 'r', encoding = 'utf-8', errors='ignore')
             txt = f.read()
@@ -49,40 +47,24 @@ class CBO:
                 if j != i:
                     if files[j][1] in txt:
                         count += 1
-                        visited.append(files[j][1])
-            visits.append(visited)
-
-            # get the number of times the class is mentioned in other classes
-
-            for j in range(len(files)):
-                if j != i:
-                    f = open(files[j][0], 'r', encoding = 'utf-8', errors='ignore')
-                    txt = f.read()
-                    f.close()
-                    if files[i][1] in txt and files[j][1] not in visits[i]:
-                        count += 1
-                        if i == 4:
-                            print(files[j][0])
-            counts.append(count)
-        
+            coupling.append(count)
         # adding the column to the csv
 
         data = pd.read_csv(csv_path)
 
         if 'CBO' in data.columns:
             data.drop('CBO', axis = 1)
-        data['CBO'] = counts
+        data['CBO'] = coupling
 
         data.to_csv('tp_2.csv', index=False)
         
         #NOTE: if CBO is high, class is not modular and reutilizable...
-        #TODO: reorganize CSV in asceding order of CBO
-        
+                
         #in tp_2.csv, reorganize in ascending order of CBO
         data = pd.read_csv('tp_2.csv')
         
         median = data['CBO'].median()
-        data = data.sort_values(by=['CBO'], ascending=True)
+        data = data.sort_values(by=['CBO'], ascending=False)
         
         data.to_csv('tp_2.csv', index=False)
                 

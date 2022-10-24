@@ -29,7 +29,7 @@ class CycloComp:
                     #if there are any additional boolean condition
                     if '&&' in line or '||' in line:
                         count += 1
-                source_file.close()
+                        
                 
                 #in tp_2.csv, add the cyclomatic complexity to the corresponding class
                 for i in range(len(csv_file)):
@@ -40,9 +40,9 @@ class CycloComp:
                             csv_file.at[i, "CC"] = count
                         else:
                             csv_file.at[i, "CC"] = count
-                
+                        
                 #acending order of CC
-                csv_file = csv_file.sort_values(by=['CC'], ascending=True)
+                csv_file = csv_file.sort_values(by=['CC'], ascending=False)
                 
                 csv_file.to_csv("tp_2.csv", index=False, encoding='utf-8')
             
@@ -58,5 +58,4 @@ class CycloComp:
 
 if __name__ == '__main__':
     CycloComp = CycloComp()
-
     CycloComp.cyclocomp()
