@@ -28,15 +28,19 @@ class RFC:
                         count += 1
                         
                 if csv_file["nom de la classe"][i] == pl.Path(path).name:
-                    #if CC column doesnt exist, create it
-                    if "CC" not in open("tp_2.csv").read():
-                        csv_file["CC"] = ""
+                    #if RFC column doesnt exist, create it
+                    if "RFC" not in open("tp_2.csv").read():
+                        csv_file["RFC"] = ""
                         csv_file.at[i, "RFC"] = count
                     else:
                         csv_file.at[i, "RFC"] = count
                         
                 #acending order of CC
             csv_file = csv_file.sort_values(by=['RFC'], ascending=False)
+            
+            #return median of RFC
+            median = csv_file["RFC"].median()
+            print("Median of RFC is: ", median)
                 
             csv_file.to_csv("tp_2.csv", index=False, encoding='utf-8')
             
