@@ -7,8 +7,14 @@ Charbel Machaalani (20204556)
 Rapport: 
 https://docs.google.com/document/d/14R9WeQpYGdCj4hUKa0z97eTgLdVUpKZfozytkgDXoVU/edit?usp=sharing 
 
-Repo: 
+Repo TP2:
 https://github.com/jenoschan/TP2_IFT3913 
+
+Repo TP1:
+https://github.com/jenoschan/TP1_IFT3913 
+
+Pour utiliser git-of-theseus: 
+https://github.com/erikbern/git-of-theseus 
 
 Pour utiliser CLOC_Ratio.py:
 
@@ -42,5 +48,9 @@ Pour utiliser WMC.py
 
 2) executer WMC.py avec le path du dossier que vous voulez analyser comme premier argument et le fichier tp_2.csv comme deuxieme arguement que jls aurait produit. Le script va ajouter le nombre de methodes de chaque classe dans le dossier dans la colonne WMC dans tp_2.csv
 
+Pour utiliser RFC.py
 
+1) commencez par run jls.py avec le dossier source comme argument, cela va generer un fichier tp_2.csv
+
+2) executer RFC.py, le script va calculer le nombre de fonction (potentiellement) appelée dans chaque classe vue dans tp_2.csv.
 

@@ -22,10 +22,10 @@ class RFC:
                 count = 0
                 #count all function calls
                 for line in source_file:
-                    if '()' in line:
+                    if "();" in line:
                         count += 1
-                
-                count = int(count)
+                    if "(" && ");" in line:
+                        count += 1
                         
                 if csv_file["nom de la classe"][i] == pl.Path(path).name:
                     #if CC column doesnt exist, create it
@@ -41,5 +41,5 @@ class RFC:
             csv_file.to_csv("tp_2.csv", index=False, encoding='utf-8')
             
 if __name__ == "__main__":
-    rfc = RFC()
-    rfc.RFC()
+    RFC = RFC()
+    RFC.RFC()
