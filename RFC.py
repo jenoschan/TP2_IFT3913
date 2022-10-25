@@ -24,7 +24,7 @@ class RFC:
                 for line in source_file:
                     if "();" in line:
                         count += 1
-                    if "(" && ");" in line:
+                    if "(" and ");" in line:
                         count += 1
                         
                 if csv_file["nom de la classe"][i] == pl.Path(path).name:
